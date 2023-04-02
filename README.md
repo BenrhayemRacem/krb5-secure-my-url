@@ -41,8 +41,8 @@ Only an authenticated client with kerberos can have access to the server and rea
       - nginx config file : **nginx.conf**
       - default http server (on port 80) that is protected : **default**
 # Workflow :
-   - dd ubuntu@EXAMPLE.COM and ubuntu/admin@EXAMPLE.COM as Principals in kerberos
-   - add HTTP/kerberos-http.lxd@EXAMPLE.COM as service principal
+   - Add ubuntu@EXAMPLE.COM and ubuntu/admin@EXAMPLE.COM as Principals in kerberos
+   - Add HTTP/kerberos-http.lxd@EXAMPLE.COM as service principal
    - Extract the key from the KDC and store it in the kerberos-http server using ktadd utility. If the kadmin utility not available in the service host , extract the keytab in the kerberos server and copy it into the http-server (using scp for example ).
       - Copy the file into /etc/krb5.keytab
       - Make sure its in mode 0600 and owned by root:root
@@ -54,18 +54,18 @@ Only an authenticated client with kerberos can have access to the server and rea
       - Rload the nginx server
       - Start the client container and log with the ubuntu user
       - generate a new TGT ticket using kinit command
-      - check the ticket using the klist command
-      - curl into the http server ```KRB5_TRACE=/dev/stderr curl -v -i  --negotiate -u:  http://kerberos-http```
-        - run curl command with verbose flag and using the negotiate authentication mechanism
+      - Check the ticket using the klist command
+      - Curl into the http server ```KRB5_TRACE=/dev/stderr curl -v -i  --negotiate -u:  http://kerberos-http```
+        - Run curl command with verbose flag and using the negotiate authentication mechanism
         - You got a clear output about how kerberos works using the TGT and generating a TGS
-        - nginx gives a success response
-        - you can examine the ticket again using klist ( service prinicapl added )
-        - destroy the ticket using kdestroy command
-        - curl again
-        - you got an authorization required response (401 status code)
+        - Nginx gives a success response
+        - You can examine the ticket again using klist ( service principal added )
+        - Destroy the ticket using kdestroy command
+        - Curl again
+        - You got an authorization required response (401 status code)
         
 # Execution
-you can find an execution video [![here]()](https://www.youtube.com/watch?v=WtHJgz-sNJ4).
+You can find an execution video [![here]()](https://www.youtube.com/watch?v=WtHJgz-sNJ4).
         
    
    
